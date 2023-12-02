@@ -36,26 +36,31 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun getAddressByCep(cep: String) {
-        val retrofitClient = RetrofitClient.getRetrofitInstance("https://viacep.com.br/ws/")
-        val endpoint = retrofitClient.create(apiService::class.java)
+        if(cep == null || cep.isEmpty()) {
+            tvResultCep.text = "Digite algum CEP"
+        } else {
+            val retrofitClient = RetrofitClient.getRetrofitInstance("https://viacep.com.br/ws/")
+            val endpoint = retrofitClient.create(apiService::class.java)
 
-        endpoint.getAddress(cep).enqueue(object : retrofit2.Callback<AddressResponse>{
-            override fun onResponse(call: Call<AddressResponse>,
-                                    response: Response<AddressResponse>) {
+            endpoint.getAddress(cep).enqueue(object : retrofit2.Callback<AddressResponse>{
+                override fun onResponse(call: Call<AddressResponse>,
+                                        response: Response<AddressResponse>) {
 
-                var data = response.body()
+                    var data = response.body()
 
-                if (data != null && data?.logradouro != null) {
-                    tvResultCep.text =
-                        "${data?.logradouro}, ${data?.bairro}, ${data?.localidade} - ${data?.uf}"
-                } else {
-                    tvResultCep.text = "Digite um CEP válido"
+                    if (data == null || data?.erro == true ) {
+                        tvResultCep.text = "Digite um CEP válido"
+                    } else {
+                        tvResultCep.text =
+                            "${data?.logradouro}, ${data?.bairro}, ${data?.localidade} - ${data?.uf}"
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<AddressResponse>, t: Throwable) {
-                println("Erro")
-            }
-        })
+                override fun onFailure(call: Call<AddressResponse>, t: Throwable) {
+                    println("Error")
+                }
+            })
+        }
+
     }
 }

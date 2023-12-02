@@ -11,4 +11,5 @@ data class AddressResponse(
     val gia: String?,
     val ddd: String?,
     val siafi: String?,
+    val erro: Boolean?,
 )
