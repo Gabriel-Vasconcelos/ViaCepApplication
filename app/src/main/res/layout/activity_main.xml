@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:paddingHorizontal="24dp">
+    android:paddingHorizontal="52dp">
 
     <EditText
         android:id="@+id/editTextCep"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="8"
         android:inputType="number"
@@ -18,14 +18,16 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pesquisar por CEP"
-        android:paddingHorizontal="44dp"
+        android:text="Pesquisar"
+        android:drawableStart="@drawable/ic_search"
+        android:paddingHorizontal="88dp"
         android:paddingVertical="12dp"
         android:layout_marginTop="36dp"
-        android:background="@color/black"
-        android:textColor="@color/white"/>
+        android:background="@color/purple_700"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/textView"
